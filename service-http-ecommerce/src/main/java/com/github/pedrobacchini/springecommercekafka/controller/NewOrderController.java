@@ -12,7 +12,7 @@ import java.util.UUID;
 public class NewOrderController {
 
     @Autowired
-    private KafkaTemplate<Object, Object> template;
+    private KafkaTemplate<String, Order> template;
 
     @GetMapping("/new")
     private String generateNewOrder(@RequestParam String email, @RequestParam String amount) {
