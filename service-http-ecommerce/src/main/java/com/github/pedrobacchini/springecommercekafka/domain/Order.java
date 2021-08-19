@@ -1,10 +1,12 @@
-package com.github.pedrobacchini.springecommercekafka.controller;
+package com.github.pedrobacchini.springecommercekafka.domain;
 
 public class Order {
 
-    private final String email;
-    private final String orderId;
-    private final String amount;
+    private String email;
+    private String orderId;
+    private String amount;
+
+    public Order() { }
 
     public Order(String orderId, String amount, String email) {
         this.orderId = orderId;
