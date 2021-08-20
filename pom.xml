@@ -20,6 +20,7 @@
 	<modules>
 		<module>service-fraud-detector</module>
 		<module>service-http-ecommerce</module>
+		<module>service-email</module>
 	</modules>
 
 	<properties>

@@ -25,4 +25,13 @@ public class Order {
     public String getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "email='" + email + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", amount='" + amount + '\'' +
+                '}';
+    }
 }
