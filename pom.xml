@@ -21,6 +21,7 @@
 		<module>service-fraud-detector</module>
 		<module>service-http-ecommerce</module>
 		<module>service-email</module>
+		<module>service-log</module>
 	</modules>
 
 	<properties>
