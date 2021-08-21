@@ -29,7 +29,16 @@ public class NewOrderController {
         var orderId = UUID.randomUUID().toString();
         Order order = new Order(orderId, amount, email);
 
-        orderDispatcher.send("ECOMMERCE_NEW_ORDER", email, order).addCallback(new ListenableFutureCallback<>() {
+        orderDispatcher.send("ECOMMERCE_NEW_ORDER", email, order).addCallback(generateNewOrderCallback(order));
+
+        var emailCode = "Thank you for your order! We are processing your order";
+        emailDispatcher.send("ECOMMERCE_SEND_EMAIL", email, emailCode).addCallback(sendEmailCallback(emailCode));
+
+        return "New order sent";
+    }
+
+    private ListenableFutureCallback<SendResult<String, Order>> generateNewOrderCallback(Order order) {
+        return new ListenableFutureCallback<>() {
 
             @Override
             public void onSuccess(SendResult<String, Order> result) {
@@ -40,10 +49,11 @@ public class NewOrderController {
             public void onFailure(Throwable ex) {
                 logger.info("Unable to send message=[" + order + "] due to : " + ex.getMessage());
             }
-        });
+        };
+    }
 
-        var emailCode = "Thank you for your order! We are processing your order";
-        emailDispatcher.send("ECOMMERCE_SEND_EMAIL", email, emailCode).addCallback(new ListenableFutureCallback<>() {
+    private ListenableFutureCallback<SendResult<String, String>> sendEmailCallback(String emailCode) {
+        return new ListenableFutureCallback<>() {
 
             @Override
             public void onSuccess(SendResult<String, String> result) {
@@ -54,8 +64,6 @@ public class NewOrderController {
             public void onFailure(Throwable ex) {
                 logger.info("Unable to send message=[" + emailCode + "] due to : " + ex.getMessage());
             }
-        });
-
-        return "New order sent";
+        };
     }
 }
