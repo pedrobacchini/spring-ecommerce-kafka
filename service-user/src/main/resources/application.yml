@@ -2,3 +2,10 @@ spring:
   kafka:
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+amazon:
+  dynamodb:
+    endpoint: ${DYNAMO_ENDPOINT:http://localhost:4566}
+  region: ${AWS_REGION:us-east-1}
+  aws:
+    dynamo:
+      table: ${USER_TABLE:User}
