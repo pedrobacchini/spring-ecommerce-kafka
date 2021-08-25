@@ -2,6 +2,8 @@ spring:
   kafka:
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 amazon:
   dynamodb:
     endpoint: ${DYNAMO_ENDPOINT:http://localhost:4566}

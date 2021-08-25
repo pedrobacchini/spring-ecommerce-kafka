@@ -28,7 +28,7 @@ public class NewOrderListener {
     }
 
     @KafkaListener(
-            id = "userService",
+            id = "newOrderListener",
             topicPattern = "ECOMMERCE_NEW_ORDER"
     )
     public void consume(ConsumerRecord<String, Order> record) {
