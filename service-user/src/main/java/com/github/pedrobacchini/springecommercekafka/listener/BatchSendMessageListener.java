@@ -30,7 +30,7 @@ public class BatchSendMessageListener {
 
     @KafkaListener(
             id = "batchSendMessageListener",
-            topicPattern = "SEND_MESSAGE_TO_ALL_USERS"
+            topics = "SEND_MESSAGE_TO_ALL_USERS"
     )
     public void consume(ConsumerRecord<String, String> record) {
         logger.info("__________________________________");

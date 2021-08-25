@@ -29,7 +29,7 @@ public class NewOrderListener {
 
     @KafkaListener(
             id = "newOrderListener",
-            topicPattern = "ECOMMERCE_NEW_ORDER"
+            topics = "ECOMMERCE_NEW_ORDER"
     )
     public void consume(ConsumerRecord<String, Order> record) {
         logger.info("__________________________________");
