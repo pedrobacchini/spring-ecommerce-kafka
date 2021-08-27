@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -31,10 +33,11 @@ public class NewOrderListener {
             id = "newOrderListener",
             topics = "ECOMMERCE_NEW_ORDER"
     )
-    public void consume(ConsumerRecord<String, Order> record) {
+    public void consume(ConsumerRecord<String, Order> record, @Headers MessageHeaders headers) {
         logger.info("__________________________________");
         logger.info("Processing new order, checking for new user");
         logger.info(String.valueOf(record.value()));
+        logger.info(String.valueOf(headers));
         var order = record.value();
         if (isNewUser(order.getEmail())) {
             insertNewUser(order.getEmail());
