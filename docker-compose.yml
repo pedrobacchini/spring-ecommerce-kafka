@@ -49,3 +49,18 @@ services:
       - "4566:4566"
     volumes:
       - ./localstack/data:/tmp/localstack/data
+
+  akhq:
+    image: tchiotludo/akhq
+    container_name: akhq
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "broker:19092"
+    ports:
+    - "9022:8080"
+    depends_on:
+      - broker
